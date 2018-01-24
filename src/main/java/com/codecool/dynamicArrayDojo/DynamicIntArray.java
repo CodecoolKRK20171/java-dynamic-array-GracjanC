@@ -47,11 +47,33 @@ public class DynamicIntArray {
         }
 
         this.array = newArray;
-        this.size = newArray.length;
+        this.size = newSize;
     }
 
     public void insert(int index, int number) {
+        int newSize = this.size + 1;
+        int lastIndex = newSize - 1;
+        int[] newArray = new int[newSize];
 
+        if (index <= this.size) {
+
+            int j = 0;
+            for (int i = 0; i < newSize; i++) {
+                if (i == index) {
+                    newArray[i] = number;
+                } else {
+                    newArray[i] = this.array[j];
+                    j++;
+                }
+            }
+        } else {
+            for (int i = 0; i < this.size; i++) {
+                newArray[i] = this.array[i];
+            }
+            newArray[lastIndex] = number;
+        }
+        this.array = newArray;
+        this.size = newSize;
     }
 
     public String toString() {
@@ -66,5 +88,4 @@ public class DynamicIntArray {
 
         return arrayToStr;
     }
-
 }
